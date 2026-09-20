@@ -6,7 +6,7 @@ const inputs = document.querySelectorAll('.controls input');
     }
 
     inputs.forEach(input => input.addEventListener('change', handleUpdate));
-    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate))
 
 let video = document.querySelector(".flex");
 
@@ -24,25 +24,16 @@ let skip = document.querySelector(".skip");
 playButton.addEventListener("click", function () {
 
     if (video.paused) {
+
         video.play();
+        playButton.textContent = "❚ ❚";
+
     } else {
+
         video.pause();
+        playButton.textContent = "►";
+
     }
-
-});
-
-
-// CHANGE PLAY / PAUSE SYMBOL
-
-video.addEventListener("play", function () {
-
-    playButton.textContent = "❚ ❚";
-
-});
-
-video.addEventListener("pause", function () {
-
-    playButton.textContent = "►";
 
 });
 
@@ -51,15 +42,14 @@ video.addEventListener("pause", function () {
 
 video.addEventListener("timeupdate", function () {
 
-    let progressPercentage =
-        (video.currentTime / video.duration) * 100;
+    let percentage = (video.currentTime / video.duration) * 100;
 
-    progress.value = progressPercentage;
+    progress.value = percentage;
 
 });
 
 
-// CHANGE VIDEO POSITION USING PROGRESS BAR
+// CHANGE VIDEO POSITION
 
 progress.addEventListener("input", function () {
 
