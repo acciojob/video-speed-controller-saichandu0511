@@ -7,30 +7,6 @@ const inputs = document.querySelectorAll('.controls input');
 
     inputs.forEach(input => input.addEventListener('change', handleUpdate));
     inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
-let video = document.querySelector(".flex");
-let speed = document.querySelector(".speed");
-let speedBar = document.querySelector(".speed-bar");
-
-function changeSpeed(e) {
-
-    let y = e.pageY - speed.offsetTop;
-
-    let percent = y / speed.offsetHeight;
-
-    let min = 0.4;
-    let max = 4;
-
-    let playbackRate = percent * (max - min) + min;
-
-    speedBar.style.height = percent * 100 + "%";
-
-    speedBar.textContent = playbackRate.toFixed(1) + "×";
-
-    video.playbackRate = playbackRate;
-}
-
-speed.addEventListener("mousemove", changeSpeed);
-
 
 let video = document.querySelector(".flex");
 
@@ -43,8 +19,7 @@ let rewind = document.querySelector(".rewind");
 let skip = document.querySelector(".skip");
 
 
-
-// PLAY / PAUSE BUTTON
+// PLAY / PAUSE
 
 playButton.addEventListener("click", function () {
 
@@ -57,32 +32,53 @@ playButton.addEventListener("click", function () {
 });
 
 
-// Update button symbol when video plays
+// CHANGE PLAY / PAUSE SYMBOL
+
 video.addEventListener("play", function () {
+
     playButton.textContent = "❚ ❚";
+
 });
 
-
-// Update button symbol when video pauses
 video.addEventListener("pause", function () {
+
     playButton.textContent = "►";
+
 });
 
+
+// PROGRESS BAR
+
+video.addEventListener("timeupdate", function () {
+
+    let progressPercentage =
+        (video.currentTime / video.duration) * 100;
+
+    progress.value = progressPercentage;
+
+});
+
+
+// CHANGE VIDEO POSITION USING PROGRESS BAR
 
 progress.addEventListener("input", function () {
 
-    video.currentTime = (progress.value / 100) * video.duration;
+    video.currentTime =
+        (progress.value / 100) * video.duration;
 
 });
 
 
 // VOLUME
+
 volume.addEventListener("input", function () {
 
     video.volume = volume.value;
 
 });
 
+
+// PLAYBACK SPEED
 
 playbackSpeed.addEventListener("input", function () {
 
@@ -91,6 +87,8 @@ playbackSpeed.addEventListener("input", function () {
 });
 
 
+// REWIND 10 SECONDS
+
 rewind.addEventListener("click", function () {
 
     video.currentTime = video.currentTime - 10;
@@ -98,6 +96,7 @@ rewind.addEventListener("click", function () {
 });
 
 
+// FAST FORWARD 25 SECONDS
 
 skip.addEventListener("click", function () {
 
@@ -105,5 +104,3 @@ skip.addEventListener("click", function () {
 
 });
 ```
-
-
