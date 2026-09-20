@@ -30,3 +30,79 @@ function changeSpeed(e) {
 }
 
 speed.addEventListener("mousemove", changeSpeed);
+
+
+let video = document.querySelector(".flex");
+
+let playButton = document.querySelector(".toggle");
+let progress = document.querySelector(".progress");
+let volume = document.querySelector(".volume");
+let playbackSpeed = document.querySelector(".playbackSpeed");
+
+let rewind = document.querySelector(".rewind");
+let skip = document.querySelector(".skip");
+
+
+
+playButton.addEventListener("click", function () {
+
+    if (video.paused) {
+        video.play();
+        playButton.textContent = "❚ ❚";
+    } else {
+        video.pause();
+        playButton.textContent = "►";
+    }
+
+});
+
+
+
+video.addEventListener("timeupdate", function () {
+
+    let percentage = (video.currentTime / video.duration) * 100;
+
+    progress.value = percentage;
+
+});
+
+
+
+progress.addEventListener("input", function () {
+
+    video.currentTime = (progress.value / 100) * video.duration;
+
+});
+
+
+// VOLUME
+volume.addEventListener("input", function () {
+
+    video.volume = volume.value;
+
+});
+
+
+playbackSpeed.addEventListener("input", function () {
+
+    video.playbackRate = playbackSpeed.value;
+
+});
+
+
+rewind.addEventListener("click", function () {
+
+    video.currentTime = video.currentTime - 10;
+
+});
+
+
+
+skip.addEventListener("click", function () {
+
+    video.currentTime = video.currentTime + 25;
+
+});
+```
+
+
