@@ -44,28 +44,29 @@ let skip = document.querySelector(".skip");
 
 
 
+// PLAY / PAUSE BUTTON
+
 playButton.addEventListener("click", function () {
 
     if (video.paused) {
         video.play();
-        playButton.textContent = "❚ ❚";
     } else {
         video.pause();
-        playButton.textContent = "►";
     }
 
 });
 
 
-
-video.addEventListener("timeupdate", function () {
-
-    let percentage = (video.currentTime / video.duration) * 100;
-
-    progress.value = percentage;
-
+// Update button symbol when video plays
+video.addEventListener("play", function () {
+    playButton.textContent = "❚ ❚";
 });
 
+
+// Update button symbol when video pauses
+video.addEventListener("pause", function () {
+    playButton.textContent = "►";
+});
 
 
 progress.addEventListener("input", function () {
